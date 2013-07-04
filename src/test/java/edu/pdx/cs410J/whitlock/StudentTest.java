@@ -48,6 +48,13 @@ public class StudentTest extends InvokeMainTestCase
     assertErrorMessageExitCodeAndUsage(result, errorMessage);
   }
 
+  @Test
+  public void missingClassesPrintsNothingToStandardErrorAndExitsZero() {
+    MainMethodResult result = invokeMain("Dave", "male", "3.65");
+    assertThat(result.getErr(), equalTo(""));
+    assertThat(result.getExitCode(), equalTo(0));
+  }
+
   @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {

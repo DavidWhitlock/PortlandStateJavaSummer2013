@@ -60,9 +60,12 @@ public class Student extends Human {
 
     } else if (args.length == 2) {
       printErrorMessageAndExit(MISSING_GPA);
+
+    } else if (args.length == 0){
+      printErrorMessageAndExit("Missing command line arguments");
     }
 
-    printErrorMessageAndExit("Missing command line arguments");
+    System.exit(0);
   }
 
   private static void printErrorMessageAndExit(String errorMessage) {
