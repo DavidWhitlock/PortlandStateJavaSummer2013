@@ -33,6 +33,16 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(result.getErr(), containsString("Missing command line arguments"));
   }
 
+  @Test
+  public void missingGenderPrintsMissingGenderToStandardError() {
+    MainMethodResult result = invokeMain("Dave");
+    assertThat(result.getErr(), containsString("Missing Gender"));
+  }
+
+  public void invalidCommandLinePrintUsageInformation() {
+
+  }
+
   @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
