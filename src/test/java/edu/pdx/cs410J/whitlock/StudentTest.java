@@ -21,26 +21,24 @@ public class StudentTest extends InvokeMainTestCase
     return invokeMain(Student.class, args);
   }
 
-  @Test
-  public void noArgumentsHasExitCodeOf1() {
-    MainMethodResult result = invokeMain();
+  private void assertErrorMessageExitCodeAndUsage(MainMethodResult result, String errorMessage) {
     assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getErr(), containsString(errorMessage));
+    assertThat(result.getErr(), containsString(Student.USAGE_MESSAGE));
   }
 
   @Test
   public void noArgumentsPrintsMissingArgumentsToStandardError() {
     MainMethodResult result = invokeMain();
-    assertThat(result.getErr(), containsString("Missing command line arguments"));
+    String errorMessage = "Missing command line arguments";
+    assertErrorMessageExitCodeAndUsage(result, errorMessage);
   }
 
   @Test
   public void missingGenderPrintsMissingGenderToStandardError() {
     MainMethodResult result = invokeMain("Dave");
-    assertThat(result.getErr(), containsString("Missing Gender"));
-  }
-
-  public void invalidCommandLinePrintUsageInformation() {
-
+    String errorMessage = "Missing Gender";
+    assertErrorMessageExitCodeAndUsage(result, errorMessage);
   }
 
   @Ignore

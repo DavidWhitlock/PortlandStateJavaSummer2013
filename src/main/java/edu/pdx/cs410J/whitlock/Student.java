@@ -7,9 +7,15 @@ import java.util.ArrayList;
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
-public class Student extends Human {                                                
-                                                                                    
-  /**                                                                               
+public class Student extends Human {
+
+  static final String USAGE_MESSAGE = "args are (in this order)\n" +
+    "  name \n" +
+    "  gender \n" +
+    "  gpa \n" +
+    "  classes";
+
+  /**
    * Creates a new <code>Student</code>                                             
    *                                                                                
    * @param name                                                                    
@@ -49,11 +55,15 @@ public class Student extends Human {
    */
   public static void main(String[] args) {
     if (args.length == 1) {
-      System.err.println("Missing Gender");
-      System.exit(1);
+      printErrorMessageAndExit("Missing Gender");
     }
 
-    System.err.println("Missing command line arguments");
+    printErrorMessageAndExit("Missing command line arguments");
+  }
+
+  private static void printErrorMessageAndExit(String errorMessage) {
+    System.err.println(errorMessage);
+    System.err.println(USAGE_MESSAGE);
     System.exit(1);
   }
 }
