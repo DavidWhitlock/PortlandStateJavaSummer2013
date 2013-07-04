@@ -14,6 +14,7 @@ public class Student extends Human {
     "  gender \n" +
     "  gpa \n" +
     "  classes";
+  static final String MISSING_GPA = "Missing GPA";
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -56,6 +57,9 @@ public class Student extends Human {
   public static void main(String[] args) {
     if (args.length == 1) {
       printErrorMessageAndExit("Missing Gender");
+
+    } else if (args.length == 2) {
+      printErrorMessageAndExit(MISSING_GPA);
     }
 
     printErrorMessageAndExit("Missing command line arguments");

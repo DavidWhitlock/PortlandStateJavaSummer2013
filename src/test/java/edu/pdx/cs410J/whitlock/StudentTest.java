@@ -41,6 +41,13 @@ public class StudentTest extends InvokeMainTestCase
     assertErrorMessageExitCodeAndUsage(result, errorMessage);
   }
 
+  @Test
+  public void missingGpaPrintsMissingGpaToStandardError() {
+    MainMethodResult result = invokeMain("Dave", "male");
+    String errorMessage = Student.MISSING_GPA;
+    assertErrorMessageExitCodeAndUsage(result, errorMessage);
+  }
+
   @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
