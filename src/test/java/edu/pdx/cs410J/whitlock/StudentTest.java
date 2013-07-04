@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.whitlock;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,8 +17,8 @@ import static org.hamcrest.core.StringContains.containsString;
 public class StudentTest extends InvokeMainTestCase
 {
 
-  private MainMethodResult invokeMain() {
-    return invokeMain(Student.class);
+  private MainMethodResult invokeMain(String... args) {
+    return invokeMain(Student.class, args);
   }
 
   @Test
@@ -30,6 +31,15 @@ public class StudentTest extends InvokeMainTestCase
   public void noArgumentsPrintsMissingArgumentsToStandardError() {
     MainMethodResult result = invokeMain();
     assertThat(result.getErr(), containsString("Missing command line arguments"));
+  }
+
+  @Ignore
+  @Test
+  public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
+    MainMethodResult result = invokeMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
+    String expected = "Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, Operating " +
+      "Systems, and Java. He says \"This class is too much work\".";
+    assertThat(result.getOut(), containsString(expected));
   }
 
 }
