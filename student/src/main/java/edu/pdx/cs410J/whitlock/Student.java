@@ -29,13 +29,18 @@ public class Student extends Human {
    * @param gpa                                                                     
    *        The student's grade point average                                       
    * @param gender                                                                  
-   *        The student's gender ("male" or "female", case insensitive)             
+   *        The student's gender ("male" or "female", case insensitive)
+   *
+   * @throws IllegalStudentArgumentException
+   *         GPA is negative
    */                                                                               
-  public Student(String name, ArrayList classes, double gpa, String gender) {
+  public Student(String name, ArrayList classes, double gpa, String gender)
+    throws IllegalStudentArgumentException {
+
     super(name);
 
     if (gpa < 0.0) {
-      printErrorMessageAndExit("Invalid GPA: " + gpa);
+      throw new IllegalStudentArgumentException("Invalid GPA: " + gpa);
     }
 
     this.gpa = gpa;
@@ -89,7 +94,14 @@ public class Student extends Human {
         gpa = Double.parseDouble(args[2]);
     }
 
-    Student student = new Student(name, classes, gpa, gender) ;
+    Student student;
+    try {
+      student = new Student(name, classes, gpa, gender);
+
+    } catch (IllegalStudentArgumentException ex) {
+      printErrorMessageAndExit(ex.getMessage());
+      return;
+    }
 
     System.out.print(student.toString());
     System.exit(0);
