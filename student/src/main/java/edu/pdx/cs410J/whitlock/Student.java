@@ -72,10 +72,17 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    String genderBasedPronoun = (this.gender.equalsIgnoreCase("male") ? "He" : "She");
-    String classDescriptions = getDescriptionOfClasses();
-    return name + " has a GPA of " + gpa + " and is taking " + classDescriptions + ".  " +
-      genderBasedPronoun + " says \"" + says() + "\".";
+    return name + " has a GPA of " + gpa + " and is taking " + getDescriptionOfClasses() + ".  " +
+      getGenderBasedPronoun() + " says \"" + says() + "\".";
+  }
+
+  private String getGenderBasedPronoun() {
+    if (this.gender.equalsIgnoreCase("male")) {
+      return "He";
+
+    } else {
+      return "She";
+    }
   }
 
   private String getDescriptionOfClasses() {
@@ -144,6 +151,10 @@ public class Student extends Human {
         }
     }
 
+    printStudentDescriptionToStandardOut(name, classes, gpa, gender);
+  }
+
+  private static void printStudentDescriptionToStandardOut(String name, List<String> classes, double gpa, String gender) {
     Student student;
     try {
       student = new Student(name, classes, gpa, gender);
