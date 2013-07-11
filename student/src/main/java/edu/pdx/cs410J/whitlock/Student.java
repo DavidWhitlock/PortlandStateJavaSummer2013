@@ -16,6 +16,8 @@ public class Student extends Human {
     "  classes";
   static final String MISSING_GPA = "Missing GPA";
 
+  private double gpa;
+
   /**
    * Creates a new <code>Student</code>                                             
    *                                                                                
@@ -31,6 +33,8 @@ public class Student extends Human {
    */                                                                               
   public Student(String name, ArrayList classes, double gpa, String gender) {
     super(name);
+
+    this.gpa = gpa;
   }
 
   /**                                                                               
@@ -38,7 +42,7 @@ public class Student extends Human {
    */
   @Override
   public String says() {                                                            
-    throw new UnsupportedOperationException("Not implemented yet");
+    return "This class is too much work";
   }
                                                                                     
   /**                                                                               
@@ -46,7 +50,8 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    throw new UnsupportedOperationException("Not implemented yet");
+    return name + " has a GPA of " + gpa + " and is taking 0 classes.  " +
+            "He says \"" + says() + "\".";
   }
 
   /**
@@ -55,20 +60,34 @@ public class Student extends Human {
    * standard out by invoking its <code>toString</code> method.
    */
   public static void main(String[] args) {
-    if (args.length == 1) {
-      printErrorMessageAndExit("Missing Gender");
 
-    } else if (args.length == 2) {
-      printErrorMessageAndExit(MISSING_GPA);
+    String name = null;
+    ArrayList classes = null;
+    double gpa = 0.0;
+    String gender = null;
 
-    } else if (args.length == 0){
-      printErrorMessageAndExit("Missing command line arguments");
+    switch (args.length) {
+      case 0:
+        printErrorMessageAndExit("Missing command line arguments");
+        break;
 
-    } else if (args.length == 3) {
-      System.out.println("Dave has a GPA of 3.64 and is taking 0 classes.  " +
-            "He says \"This class is too much work\".");
+      case 1:
+        printErrorMessageAndExit("Missing Gender");
+        break;
+
+      case 2:
+        printErrorMessageAndExit(MISSING_GPA);
+        break;
+
+      case 3:
+        name = args[0];
+        gender = args[1];
+        gpa = Double.parseDouble(args[2]);
     }
 
+    Student student = new Student(name, classes, gpa, gender) ;
+
+    System.out.print(student.toString());
     System.exit(0);
   }
 

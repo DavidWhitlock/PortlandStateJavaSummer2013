@@ -64,6 +64,21 @@ public class StudentTest extends InvokeMainTestCase
 
   @Ignore
   @Test
+  public void invalidDoubleForGpaPrintInvalidGpaToStandardError() {
+
+  }
+
+  // Test some things about gender
+
+  @Test
+  public void noClassesPrintsDescriptionOfStudentWithADifferentName() {
+    MainMethodResult result = invokeMain("David", "male", "3.64");
+    assertThat(result.getOut().trim(), equalTo("David has a GPA of 3.64 and is taking 0 classes.  " +
+      "He says \"This class is too much work\"."));
+  }
+
+  @Ignore
+  @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
     MainMethodResult result = invokeMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");
     String expected = "Dave has a GPA of 3.64 and is taking 3 classes: Algorithms, Operating " +
