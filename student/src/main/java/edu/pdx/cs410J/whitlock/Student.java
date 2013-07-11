@@ -16,8 +16,8 @@ public class Student extends Human {
     "  classes";
   static final String MISSING_GPA = "Missing GPA";
 
-  private double gpa;
-  private String gender;
+  private final double gpa;
+  private final String gender;
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -45,7 +45,14 @@ public class Student extends Human {
     }
 
     this.gpa = gpa;
-    this.gender = gender;
+
+    if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+      this.gender = gender;
+
+    } else {
+      throw new IllegalStudentArgumentException("Invalid gender: " + gender);
+    }
+
   }
 
   /**                                                                               

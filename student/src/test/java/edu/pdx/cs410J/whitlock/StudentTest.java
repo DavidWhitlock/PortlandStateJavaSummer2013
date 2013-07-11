@@ -96,6 +96,12 @@ public class StudentTest extends InvokeMainTestCase
       "He says \"This class is too much work\"."));
   }
 
+  @Test
+  public void invalidGenderPrintsInvalidGenderToStandardError() {
+    MainMethodResult result = invokeMain("David", "turtle", "3.64");
+    assertThat(result.getErr(), containsString("Invalid gender: turtle"));
+  }
+
   @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
