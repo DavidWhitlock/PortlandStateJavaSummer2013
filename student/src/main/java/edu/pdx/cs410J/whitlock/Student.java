@@ -17,6 +17,7 @@ public class Student extends Human {
   static final String MISSING_GPA = "Missing GPA";
 
   private double gpa;
+  private String gender;
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -44,6 +45,7 @@ public class Student extends Human {
     }
 
     this.gpa = gpa;
+    this.gender = gender;
   }
 
   /**                                                                               
@@ -59,8 +61,9 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
+    String genderBasedPronoun = (this.gender.equals("male") ? "He" : "She");
     return name + " has a GPA of " + gpa + " and is taking 0 classes.  " +
-            "He says \"" + says() + "\".";
+      genderBasedPronoun + " says \"" + says() + "\".";
   }
 
   /**
