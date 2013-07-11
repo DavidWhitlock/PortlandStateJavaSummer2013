@@ -3,7 +3,8 @@ package edu.pdx.cs410J.whitlock;
 import edu.pdx.cs410J.lang.Human;
 
 import java.util.ArrayList;
-                                                                                    
+import java.util.List;
+
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
@@ -18,6 +19,7 @@ public class Student extends Human {
 
   private final double gpa;
   private final String gender;
+  private final List<String> classes;
 
   /**
    * Creates a new <code>Student</code>                                             
@@ -35,7 +37,7 @@ public class Student extends Human {
    * @throws IllegalStudentArgumentException
    *         GPA is negative
    */                                                                               
-  public Student(String name, ArrayList classes, double gpa, String gender)
+  public Student(String name, List<String> classes, double gpa, String gender)
     throws IllegalStudentArgumentException {
 
     super(name);
@@ -53,6 +55,8 @@ public class Student extends Human {
       throw new IllegalStudentArgumentException("Invalid gender: " + gender);
     }
 
+    this.classes = classes;
+
   }
 
   /**                                                                               
@@ -69,8 +73,22 @@ public class Student extends Human {
    */                                                                               
   public String toString() {
     String genderBasedPronoun = (this.gender.equalsIgnoreCase("male") ? "He" : "She");
-    return name + " has a GPA of " + gpa + " and is taking 0 classes.  " +
+    String classDescriptions = getDescriptionOfClasses();
+    return name + " has a GPA of " + gpa + " and is taking " + classDescriptions + ".  " +
       genderBasedPronoun + " says \"" + says() + "\".";
+  }
+
+  private String getDescriptionOfClasses() {
+    switch (this.classes.size()) {
+      case 0:
+        return "0 classes";
+
+      case 1:
+        return "1 class: " + this.classes.get(0);
+
+      default:
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
   }
 
   /**
@@ -81,7 +99,7 @@ public class Student extends Human {
   public static void main(String[] args) {
 
     String name = null;
-    ArrayList classes = null;
+    List<String> classes = new ArrayList<>();
     double gpa = 0.0;
     String gender = null;
 
@@ -102,6 +120,10 @@ public class Student extends Human {
         name = args[0];
         gender = args[1];
         gpa = Double.parseDouble(args[2]);
+
+        for(int i = 3; i < args.length; i++) {
+          classes.add(args[i]);
+        }
     }
 
     Student student;
