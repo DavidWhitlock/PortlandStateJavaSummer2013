@@ -102,6 +102,13 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(result.getErr(), containsString("Invalid gender: turtle"));
   }
 
+  @Test
+  public void oneClassPrintsNothingToStandardErrorAndExitsWithZero() {
+    MainMethodResult result = invokeMain("David", "male", "3.64", "Advanced Java");
+    assertThat(result.getErr(), equalTo(""));
+    assertThat(result.getExitCode(), equalTo(0));
+  }
+
   @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {

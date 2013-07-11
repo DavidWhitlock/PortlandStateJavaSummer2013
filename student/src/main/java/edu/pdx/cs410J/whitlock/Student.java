@@ -98,7 +98,7 @@ public class Student extends Human {
         printErrorMessageAndExit(MISSING_GPA);
         break;
 
-      case 3:
+      default:
         name = args[0];
         gender = args[1];
         gpa = Double.parseDouble(args[2]);
