@@ -1,7 +1,6 @@
 package edu.pdx.cs410J.whitlock;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -117,7 +116,6 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(result.getOut(), containsString(expected));
   }
 
-  @Ignore
   @Test
   public void exampleCommandLineFromAssignmentPrintsTheRightThing() {
     MainMethodResult result = invokeMain("Dave", "male", "3.64", "Algorithms", "Operating Systems", "Java");

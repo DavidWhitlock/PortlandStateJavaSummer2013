@@ -87,7 +87,25 @@ public class Student extends Human {
         return "1 class: " + this.classes.get(0);
 
       default:
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.classes.size());
+        sb.append(" classes: ");
+
+        for (int i = 0; i < this.classes.size(); i++) {
+          String c = this.classes.get(i);
+          sb.append(c);
+
+          if (i != this.classes.size() - 1) {
+            sb.append(", ");
+          }
+
+          if (i == this.classes.size() - 2) {
+            sb.append("and ");
+          }
+
+        }
+
+        return sb.toString();
     }
   }
 
