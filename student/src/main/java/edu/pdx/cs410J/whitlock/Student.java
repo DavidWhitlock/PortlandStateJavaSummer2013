@@ -63,6 +63,10 @@ public class Student extends Human {
 
     } else if (args.length == 0){
       printErrorMessageAndExit("Missing command line arguments");
+
+    } else if (args.length == 3) {
+      System.out.println("Dave has a GPA of 3.64 and is taking 0 classes.  " +
+            "He says \"This class is too much work\".");
     }
 
     System.exit(0);

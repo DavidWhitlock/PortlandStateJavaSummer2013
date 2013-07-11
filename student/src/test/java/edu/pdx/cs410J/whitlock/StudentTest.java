@@ -50,9 +50,16 @@ public class StudentTest extends InvokeMainTestCase
 
   @Test
   public void missingClassesPrintsNothingToStandardErrorAndExitsZero() {
-    MainMethodResult result = invokeMain("Dave", "male", "3.65");
+    MainMethodResult result = invokeMain("Dave", "male", "3.64");
     assertThat(result.getErr(), equalTo(""));
     assertThat(result.getExitCode(), equalTo(0));
+  }
+
+  @Test
+  public void noClassesPrintsDescriptionOfStudent() {
+    MainMethodResult result = invokeMain("Dave", "male", "3.64");
+    assertThat(result.getOut().trim(), equalTo("Dave has a GPA of 3.64 and is taking 0 classes.  " +
+      "He says \"This class is too much work\"."));
   }
 
   @Ignore
