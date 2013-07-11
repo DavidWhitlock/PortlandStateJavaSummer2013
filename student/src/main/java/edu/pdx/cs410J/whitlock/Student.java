@@ -34,6 +34,10 @@ public class Student extends Human {
   public Student(String name, ArrayList classes, double gpa, String gender) {
     super(name);
 
+    if (gpa < 0.0) {
+      printErrorMessageAndExit("Invalid GPA: " + gpa);
+    }
+
     this.gpa = gpa;
   }
 

@@ -62,10 +62,10 @@ public class StudentTest extends InvokeMainTestCase
       "He says \"This class is too much work\"."));
   }
 
-  @Ignore
   @Test
-  public void invalidDoubleForGpaPrintInvalidGpaToStandardError() {
-
+  public void negativeGpaPrintsInvalidGpaToStandardError() {
+    MainMethodResult result = invokeMain("Dave", "male", "-2");
+    assertThat(result.getErr(), containsString("Invalid GPA: -2"));
   }
 
   // Test some things about gender
