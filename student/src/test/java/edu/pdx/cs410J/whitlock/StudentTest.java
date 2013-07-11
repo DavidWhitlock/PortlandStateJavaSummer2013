@@ -68,15 +68,26 @@ public class StudentTest extends InvokeMainTestCase
     assertThat(result.getErr(), containsString("Invalid GPA: -2"));
   }
 
-  // Test some things about gender
   @Test
-  public void femaleStudentPrintDescriptionToStandardOutput() {
+  public void femaleStudentPrintsDescriptionToStandardOutput() {
     MainMethodResult result = invokeMain("Angela", "female", "4.0");
     assertThat(result.getOut().trim(), equalTo("Angela has a GPA of 4.0 and is taking 0 classes.  " +
       "She says \"This class is too much work\"."));
   }
 
-  // Upper and lowercase problems.
+  @Test
+  public void uppercaseFemaleStudentPrintsDescriptionToStandardOutput() {
+    MainMethodResult result = invokeMain("Angela", "Female", "4.0");
+    assertThat(result.getOut().trim(), equalTo("Angela has a GPA of 4.0 and is taking 0 classes.  " +
+      "She says \"This class is too much work\"."));
+  }
+
+  @Test
+  public void uppercaseMaleStudentPrintsDescriptionToStandardOutput() {
+    MainMethodResult result = invokeMain("David", "Male", "3.64");
+    assertThat(result.getOut().trim(), equalTo("David has a GPA of 3.64 and is taking 0 classes.  " +
+      "He says \"This class is too much work\"."));
+  }
 
   @Test
   public void noClassesPrintsDescriptionOfStudentWithADifferentName() {

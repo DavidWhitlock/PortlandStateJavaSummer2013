@@ -61,7 +61,7 @@ public class Student extends Human {
    * <code>Student</code>.                                                          
    */                                                                               
   public String toString() {
-    String genderBasedPronoun = (this.gender.equals("male") ? "He" : "She");
+    String genderBasedPronoun = (this.gender.equalsIgnoreCase("male") ? "He" : "She");
     return name + " has a GPA of " + gpa + " and is taking 0 classes.  " +
       genderBasedPronoun + " says \"" + says() + "\".";
   }
