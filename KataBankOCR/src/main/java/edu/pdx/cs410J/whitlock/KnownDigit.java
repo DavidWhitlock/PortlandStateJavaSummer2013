@@ -1,6 +1,13 @@
 package edu.pdx.cs410J.whitlock;
 
 public enum KnownDigit {
+  DIGIT_0(
+    " _ ",
+    "| |",
+    "|_|",
+    '0'
+  ),
+
   DIGIT_1(
     "   ",
     "  |",

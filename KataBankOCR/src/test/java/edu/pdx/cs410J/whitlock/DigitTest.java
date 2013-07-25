@@ -18,6 +18,16 @@ public class DigitTest {
   }
 
   @Test
+  public void digit0IsValidDigit() {
+    String line1 = " _ ";
+    String line2 = "| |";
+    String line3 = "|_|";
+    Digit digit = new Digit(line1, line2, line3);
+
+    assertThat(digit.getDigitChar(), equalTo('0'));
+  }
+
+  @Test
   public void digit1IsValidDigit() {
     String line1 = "   ";
     String line2 = "  |";
