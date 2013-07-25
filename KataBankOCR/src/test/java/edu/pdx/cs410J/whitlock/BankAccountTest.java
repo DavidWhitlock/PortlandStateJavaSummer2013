@@ -1,6 +1,5 @@
 package edu.pdx.cs410J.whitlock;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -20,12 +19,11 @@ public class BankAccountTest
     new BankAccount(line1, line2, line3);
   }
 
-  @Ignore
   @Test
   public void account123456789IsValid() {
-    String line1 = "    _  _     _  _  _  _  _";
+    String line1 = "    _  _     _  _  _  _  _ ";
     String line2 = "  | _| _||_||_ |_   ||_||_|";
-    String line3 = "  ||_  _|  | _||_|  ||_| _| ";
+    String line3 = "  ||_  _|  | _||_|  ||_| _|";
     BankAccount account = new BankAccount(line1, line2, line3);
     assertThat(account.getDigitChars(), equalTo("123456789"));
   }
