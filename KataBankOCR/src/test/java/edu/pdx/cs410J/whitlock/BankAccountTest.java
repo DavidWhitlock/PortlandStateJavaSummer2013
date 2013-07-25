@@ -27,4 +27,13 @@ public class BankAccountTest
     BankAccount account = new BankAccount(line1, line2, line3);
     assertThat(account.getDigitChars(), equalTo("123456789"));
   }
+
+  @Test
+  public void account000000000IsValid() {
+    String line1 = " _  _  _  _  _  _  _  _  _ ";
+    String line2 = "| || || || || || || || || |";
+    String line3 = "|_||_||_||_||_||_||_||_||_|";
+    BankAccount account = new BankAccount(line1, line2, line3);
+    assertThat(account.getDigitChars(), equalTo("000000000"));
+  }
 }
