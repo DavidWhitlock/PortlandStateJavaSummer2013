@@ -28,7 +28,7 @@ public class Digit {
   public char getDigitChar() {
     for (KnownDigit known : KnownDigit.values()) {
       if (this.hasSameLinesAs(known)) {
-        return known.getCharValue();
+        return known.getDigitChar();
       }
     }
 

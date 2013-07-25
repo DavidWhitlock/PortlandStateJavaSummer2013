@@ -13,7 +13,58 @@ public enum KnownDigit {
     " _|",
     "|_ ",
     '2'
+  ),
+
+  DIGIT_3(
+    " _ ",
+    " _|",
+    " _|",
+    '3'
+  ),
+
+  DIGIT_4(
+
+    "   ",
+    "|_|",
+    "  |",
+    '4'
+  ),
+
+  DIGIT_5(
+    " _ ",
+    "|_ ",
+    " _|",
+    '5'
+  ),
+
+  DIGIT_6(
+    " _ ",
+    "|_ ",
+    "|_|",
+    '6'
+  ),
+
+  DIGIT_7(
+    " _ ",
+    "  |",
+    "  |",
+    '7'
+  ),
+
+  DIGIT_8(
+    " _ ",
+    "|_|",
+    "|_|",
+    '8'
+  ),
+
+  DIGIT_9(
+    " _ ",
+    "|_|",
+    " _|",
+    '9'
   )
+
 
   ;
 
@@ -29,7 +80,7 @@ public enum KnownDigit {
     this.charValue = charValue;
   }
 
-  public char getCharValue() {
+  public char getDigitChar() {
     return charValue;
   }
 }
