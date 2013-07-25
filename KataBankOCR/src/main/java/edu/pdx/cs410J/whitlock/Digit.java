@@ -26,6 +26,18 @@ public class Digit {
   }
 
   public char getDigitChar() {
-    return '1';
+    for (KnownDigit known : KnownDigit.values()) {
+      if (this.hasSameLinesAs(known)) {
+        return known.getCharValue();
+      }
+    }
+
+    throw new IllegalStateException("This digit is not valid");
+  }
+
+  private boolean hasSameLinesAs(KnownDigit known) {
+    return this.line1.equals(known.line1) &&
+      this.line2.equals(known.line2) &&
+      this.line3.equals(known.line3);
   }
 }

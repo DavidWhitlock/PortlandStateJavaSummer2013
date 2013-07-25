@@ -26,4 +26,14 @@ public class DigitTest {
 
     assertThat(digit.getDigitChar(), equalTo('1'));
   }
+
+  @Test
+  public void digit2IsValidDigit() {
+    String line1 = " _ ";
+    String line2 = " _|";
+    String line3 = "|_ ";
+    Digit digit = new Digit(line1, line2, line3);
+
+    assertThat(digit.getDigitChar(), equalTo('2'));
+  }
 }
