@@ -21,14 +21,14 @@ public class Digit {
     }
   }
 
-  public boolean isValid() {
-    throw new UnsupportedOperationException();
+  public char getDigitChar() {
+    return Character.forDigit(getKnownDigitForThisDigit().getDigitInt(), 10);
   }
 
-  public char getDigitChar() {
+  private KnownDigit getKnownDigitForThisDigit() {
     for (KnownDigit known : KnownDigit.values()) {
       if (this.hasSameLinesAs(known)) {
-        return known.getDigitChar();
+        return known;
       }
     }
 
@@ -39,5 +39,9 @@ public class Digit {
     return this.line1.equals(known.line1) &&
       this.line2.equals(known.line2) &&
       this.line3.equals(known.line3);
+  }
+
+  public int getDigitInt() {
+    return getKnownDigitForThisDigit().getDigitInt();
   }
 }

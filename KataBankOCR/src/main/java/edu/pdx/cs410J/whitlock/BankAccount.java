@@ -41,4 +41,22 @@ public class BankAccount {
 
     return sb.toString();
   }
+
+  public boolean hasValidChecksum() {
+    return getChecksum() == 0;
+  }
+
+  /**
+   * (d1+2*d2+3*d3 +..+9*d9) mod 11 = 0
+   *
+   */
+  private int getChecksum() {
+    int checksum = 0;
+    for (int i = 1; i <= digits.size(); i++) {
+      Digit digit = digits.get(digits.size() - i);
+      checksum += (i * digit.getDigitInt());
+    }
+
+    return checksum % 11;
+  }
 }
