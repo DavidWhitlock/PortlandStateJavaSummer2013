@@ -59,4 +59,26 @@ public class BankAccount {
 
     return checksum % 11;
   }
+
+  public BankAccountStatus getStatus() {
+    if (!containsAllKnownDigits()) {
+      return BankAccountStatus.ILLEGAL;
+
+    } else if (!hasValidChecksum()) {
+      return BankAccountStatus.ERROR;
+
+    } else {
+      return BankAccountStatus.LEGAL;
+    }
+  }
+
+  private boolean containsAllKnownDigits() {
+    for (Digit digit : digits) {
+      if (!digit.isKnownDigit()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }

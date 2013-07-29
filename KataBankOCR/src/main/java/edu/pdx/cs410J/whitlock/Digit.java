@@ -32,7 +32,7 @@ public class Digit {
       }
     }
 
-    throw new IllegalStateException("This digit is not valid");
+    return null;
   }
 
   private boolean hasSameLinesAs(KnownDigit known) {
@@ -42,6 +42,15 @@ public class Digit {
   }
 
   public int getDigitInt() {
-    return getKnownDigitForThisDigit().getDigitInt();
+    KnownDigit known = getKnownDigitForThisDigit();
+    if (known == null) {
+      throw new IllegalStateException("Not a known digit");
+    } else {
+       return known.getDigitInt();
+    }
+  }
+
+  public boolean isKnownDigit() {
+    return getKnownDigitForThisDigit() != null;
   }
 }

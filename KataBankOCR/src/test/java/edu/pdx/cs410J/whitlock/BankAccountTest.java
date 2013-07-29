@@ -57,6 +57,42 @@ public class BankAccountTest
     assertThat(account.hasValidChecksum(), equalTo(true));
   }
 
+  @Test
+  public void account664371495DoesNotHaveValidChecksum() {
+    String line1 = " _  _     _  _        _  _ ";
+    String line2 = "|_ |_ |_| _|  |  ||_||_||_ ";
+    String line3 = "|_||_|  | _|  |  |  | _| _|";
+    BankAccount account = new BankAccount(line1, line2, line3);
+    assertThat(account.getDigitChars(), equalTo("664371495"));
+    assertThat(account.hasValidChecksum(), equalTo(false));
+  }
 
+  @Test
+  public void account86110XX36HasILLStatus() {
+    // 86110??36
+    String line1 = " _  _        _  _  _  _  _ ";
+    String line2 = "|_||_   |  || |  |    _||_ ";
+    String line3 = "|_||_|  |  ||_| _||_| _||_|";
+    BankAccount account = new BankAccount(line1, line2, line3);
+    assertThat(account.getStatus(), equalTo(BankAccountStatus.ILLEGAL));
+  }
+
+  @Test
+  public void account457508000HasLegalStatus() {
+    String line1 = "    _  _  _  _  _  _  _  _ ";
+    String line2 = "|_||_   ||_ | ||_|| || || |";
+    String line3 = "  | _|  | _||_||_||_||_||_|";
+    BankAccount account = new BankAccount(line1, line2, line3);
+    assertThat(account.getStatus(), equalTo(BankAccountStatus.LEGAL));
+  }
+
+  @Test
+  public void account664371495HasErrorStatus() {
+    String line1 = " _  _     _  _        _  _ ";
+    String line2 = "|_ |_ |_| _|  |  ||_||_||_ ";
+    String line3 = "|_||_|  | _|  |  |  | _| _|";
+    BankAccount account = new BankAccount(line1, line2, line3);
+    assertThat(account.getStatus(), equalTo(BankAccountStatus.ERROR));
+  }
 
 }
