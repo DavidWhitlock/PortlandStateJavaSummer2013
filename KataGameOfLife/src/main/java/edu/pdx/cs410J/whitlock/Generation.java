@@ -1,5 +1,8 @@
 package edu.pdx.cs410J.whitlock;
 
+import static edu.pdx.cs410J.whitlock.CellState.ALIVE;
+import static edu.pdx.cs410J.whitlock.CellState.DEAD;
+
 public class Generation {
   private final int rows;
   private final int columns;
@@ -39,7 +42,7 @@ public class Generation {
         } else if (neighborsWithinBoundsOfGrid(neighborRow, neighborColumn)) {
 
           CellState neighborState = this.cellStates[neighborRow][neighborColumn];
-          if (neighborState == CellState.ALIVE) {
+          if (neighborState == ALIVE) {
             numberOfLiveNeighbors++;
           }
         }
@@ -52,5 +55,30 @@ public class Generation {
   private boolean neighborsWithinBoundsOfGrid(int neighborRow, int neighborColumn) {
     return neighborRow >= 0 && neighborRow < this.rows &&
            neighborColumn >= 0 && neighborColumn < this.columns;
+  }
+
+  public CellState getCellStateForNextGeneration(int row, int column) {
+    CellState cellState = this.getCellState(row, column);
+    int numberOfLiveNeighbors = getNumberOfLiveNeighborsForCell(row, column);
+
+    if (cellState == ALIVE) {
+      if (numberOfLiveNeighbors < 2) {
+        return DEAD;
+
+      } else if (numberOfLiveNeighbors > 3) {
+        return DEAD;
+
+      } else if (numberOfLiveNeighbors == 2 || numberOfLiveNeighbors == 3) {
+        return ALIVE;
+      }
+
+    } else {
+      assert cellState == DEAD;
+      if (numberOfLiveNeighbors == 3) {
+        return ALIVE;
+      }
+    }
+
+    throw new UnsupportedOperationException();
   }
 }
