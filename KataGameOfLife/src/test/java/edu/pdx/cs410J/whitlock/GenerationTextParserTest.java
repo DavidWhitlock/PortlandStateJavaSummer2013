@@ -18,11 +18,15 @@ public class GenerationTextParserTest {
       "....\n" +
       "....";
 
-    StringReader sr = new StringReader(grid);
-    GenerationTextParser parser = new GenerationTextParser();
-    Generation generation = parser.parse(sr);
+    Generation generation = parseGenerationText(grid);
     assertThat(generation.getNumberOfRows(), equalTo(3));
     assertThat(generation.getNumberOfColumns(), equalTo(4));
+  }
+
+  private Generation parseGenerationText(String grid) throws IOException {
+    StringReader sr = new StringReader(grid);
+    GenerationTextParser parser = new GenerationTextParser();
+    return parser.parse(sr);
   }
 
   @Test
@@ -33,13 +37,14 @@ public class GenerationTextParserTest {
       "....\n" +
       "....";
 
-    StringReader sr = new StringReader(grid);
-    GenerationTextParser parser = new GenerationTextParser();
-    Generation generation = parser.parse(sr);
+    Generation generation = parseGenerationText(grid);
+    assertThatAllCellsHaveState(generation, CellState.DEAD);
+  }
 
+  private void assertThatAllCellsHaveState(Generation generation, CellState state) {
     for (int row = 0; row < generation.getNumberOfRows(); row++) {
       for (int column = 0; column < generation.getNumberOfColumns(); column++) {
-        assertThat(generation.getCellState(row, column), equalTo(CellState.DEAD));
+        assertThat(generation.getCellState(row, column), equalTo(state));
       }
     }
   }
@@ -52,15 +57,8 @@ public class GenerationTextParserTest {
       "***\n" +
       "***";
 
-    StringReader sr = new StringReader(grid);
-    GenerationTextParser parser = new GenerationTextParser();
-    Generation generation = parser.parse(sr);
-
-    for (int row = 0; row < generation.getNumberOfRows(); row++) {
-      for (int column = 0; column < generation.getNumberOfColumns(); column++) {
-        assertThat(generation.getCellState(row, column), equalTo(CellState.ALIVE));
-      }
-    }
+    Generation generation = parseGenerationText(grid);
+    assertThatAllCellsHaveState(generation, CellState.ALIVE);
   }
 
 
