@@ -12,18 +12,26 @@ public class GenerationTextParserTest {
 
   @Test
   public void parseRowAndColumn() throws IOException {
-    String grid =
-      "3 4\n" +
-      "....\n" +
-      "....\n" +
-      "....";
 
-    Generation generation = parseGenerationText(grid);
+    Generation generation = parseGenerationText(
+      "....",
+      "....",
+      "....");
     assertThat(generation.getNumberOfRows(), equalTo(3));
     assertThat(generation.getNumberOfColumns(), equalTo(4));
   }
 
-  private Generation parseGenerationText(String grid) throws IOException {
+  private String makeGrid(String... lines) {
+    StringBuilder sb = new StringBuilder();
+    sb.append(lines.length).append(" ").append(lines[0].length()).append("\n");
+    for (String line : lines) {
+      sb.append(line).append("\n");
+    }
+    return sb.toString();
+  }
+
+  private Generation parseGenerationText(String... lines) throws IOException {
+    String grid = makeGrid(lines);
     StringReader sr = new StringReader(grid);
     GenerationTextParser parser = new GenerationTextParser();
     return parser.parse(sr);
@@ -31,13 +39,11 @@ public class GenerationTextParserTest {
 
   @Test
   public void allDeadCells() throws IOException {
-    String grid =
-      "3 4\n" +
-      "....\n" +
-      "....\n" +
-      "....";
-
-    Generation generation = parseGenerationText(grid);
+    Generation generation = parseGenerationText(
+      "....",
+      "....",
+      "...."
+    );
     assertThatAllCellsHaveState(generation, CellState.DEAD);
   }
 
@@ -51,13 +57,11 @@ public class GenerationTextParserTest {
 
   @Test
   public void allAliveCells() throws IOException {
-    String grid =
-      "3 3\n" +
-      "***\n" +
-      "***\n" +
-      "***";
-
-    Generation generation = parseGenerationText(grid);
+    Generation generation = parseGenerationText(
+      "***",
+      "***",
+      "***"
+    );
     assertThatAllCellsHaveState(generation, CellState.ALIVE);
   }
 
