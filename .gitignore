@@ -10,3 +10,8 @@
 *.ipr
 *.iml
 *.iws
+
+*/target
+
+# Emacs backup files
+*.~*
