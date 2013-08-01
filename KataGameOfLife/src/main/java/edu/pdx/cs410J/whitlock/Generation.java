@@ -36,8 +36,7 @@ public class Generation {
         if (neighborRow == row && neighborColumn == column) {
           // Don't count yourself as a neighbors
 
-        } else if (neighborRow >= 0 && neighborColumn >= 0 &&
-                   neighborRow <= this.rows - 1 && neighborColumn <= this.columns - 1) {
+        } else if (neighborsWithinBoundsOfGrid(neighborRow, neighborColumn)) {
 
           CellState neighborState = this.cellStates[neighborRow][neighborColumn];
           if (neighborState == CellState.ALIVE) {
@@ -48,5 +47,10 @@ public class Generation {
     }
 
     return numberOfLiveNeighbors;
+  }
+
+  private boolean neighborsWithinBoundsOfGrid(int neighborRow, int neighborColumn) {
+    return neighborRow >= 0 && neighborRow < this.rows &&
+           neighborColumn >= 0 && neighborColumn < this.columns;
   }
 }
