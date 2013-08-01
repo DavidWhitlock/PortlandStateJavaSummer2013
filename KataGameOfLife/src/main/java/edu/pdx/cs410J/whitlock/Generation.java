@@ -81,4 +81,42 @@ public class Generation {
 
     return DEAD;
   }
+
+  public Generation getNextGeneration() {
+    Generation nextGeneration = new Generation(this.rows, this.columns);
+    for (int row = 0; row < this.rows; row++) {
+      for (int column = 0; column < this.columns; column++) {
+        CellState nextState = this.getCellStateForNextGeneration(row, column);
+        nextGeneration.setCellState(row, column, nextState);
+      }
+    }
+
+    return nextGeneration;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Generation)) {
+      return false;
+    }
+
+    Generation other = (Generation) o;
+    if (this.rows != other.rows) {
+      return false;
+
+    } else if (this.columns != other.columns) {
+      return false;
+
+    } else {
+      for (int row = 0; row < rows; row++) {
+        for (int column = 0; column < columns; column++) {
+          if (this.cellStates[row][column] != other.cellStates[row][column]) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+  }
 }

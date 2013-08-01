@@ -140,4 +140,21 @@ public class GenerationTest {
   }
 
 
+  @Test
+  public void exampleFromCodeKataWebPage() throws IOException {
+    Generation generation = parseGenerationText(
+      "........",
+      "....*...",
+      "...**...",
+      "........");
+
+    Generation nextGeneration = parseGenerationText(
+      "........",
+      "...**...",
+      "...**...",
+      "........");
+
+    assertThat(generation.getNextGeneration(), equalTo(nextGeneration));
+
+  }
 }
