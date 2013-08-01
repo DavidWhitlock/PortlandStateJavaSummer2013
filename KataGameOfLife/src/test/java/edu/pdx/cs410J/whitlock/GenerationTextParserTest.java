@@ -23,7 +23,44 @@ public class GenerationTextParserTest {
     Generation generation = parser.parse(sr);
     assertThat(generation.getNumberOfRows(), equalTo(3));
     assertThat(generation.getNumberOfColumns(), equalTo(4));
-//    assertThat(generation.getCellState(0,0), equalTo(CellState.DEAD));
+  }
+
+  @Test
+  public void allDeadCells() throws IOException {
+    String grid =
+      "3 4\n" +
+      "....\n" +
+      "....\n" +
+      "....";
+
+    StringReader sr = new StringReader(grid);
+    GenerationTextParser parser = new GenerationTextParser();
+    Generation generation = parser.parse(sr);
+
+    for (int row = 0; row < generation.getNumberOfRows(); row++) {
+      for (int column = 0; column < generation.getNumberOfColumns(); column++) {
+        assertThat(generation.getCellState(row, column), equalTo(CellState.DEAD));
+      }
+    }
+  }
+
+  @Test
+  public void allAliveCells() throws IOException {
+    String grid =
+      "3 3\n" +
+      "***\n" +
+      "***\n" +
+      "***";
+
+    StringReader sr = new StringReader(grid);
+    GenerationTextParser parser = new GenerationTextParser();
+    Generation generation = parser.parse(sr);
+
+    for (int row = 0; row < generation.getNumberOfRows(); row++) {
+      for (int column = 0; column < generation.getNumberOfColumns(); column++) {
+        assertThat(generation.getCellState(row, column), equalTo(CellState.ALIVE));
+      }
+    }
   }
 
 

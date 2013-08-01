@@ -15,7 +15,24 @@ public class GenerationTextParser {
 
     Generation generation = new Generation(rows, columns);
 
+    for (int row = 0; row < rows; row++) {
+      String line = br.readLine();
+      for (int column = 0; column < line.length(); column++) {
+        char c = line.charAt(column);
+        CellState state;
+        if (c == '.') {
+          state = CellState.DEAD;
 
+        } else if (c == '*') {
+          state = CellState.ALIVE;
+
+        } else {
+          throw new IllegalStateException("Unknown character: " + c);
+        }
+
+        generation.setCellState(row, column, state);
+      }
+    }
 
     return generation;
   }
