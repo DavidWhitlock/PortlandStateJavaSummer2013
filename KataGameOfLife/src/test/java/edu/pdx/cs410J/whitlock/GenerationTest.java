@@ -44,4 +44,21 @@ public class GenerationTest
     assertThat(generation.getNumberOfLiveNeighborsForCell(2, 2), equalTo(3));
   }
 
+  @Test
+  public void generationWithMixOfAliveAndDead() throws IOException {
+    Generation generation = parseGenerationText(
+      "*.*",
+      ".*.",
+      "*.*");
+    assertThat(generation.getNumberOfLiveNeighborsForCell(0, 0), equalTo(1));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(0, 1), equalTo(3));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(0, 2), equalTo(1));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(1, 0), equalTo(3));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(1, 1), equalTo(4));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(1, 2), equalTo(3));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(2, 0), equalTo(1));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(2, 1), equalTo(3));
+    assertThat(generation.getNumberOfLiveNeighborsForCell(2, 2), equalTo(1));
+  }
+
 }
