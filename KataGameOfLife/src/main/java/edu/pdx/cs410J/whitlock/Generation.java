@@ -27,4 +27,26 @@ public class Generation {
   public void setCellState(int row, int column, CellState state) {
     this.cellStates[row][column] = state;
   }
+
+  public int getNumberOfLiveNeighborsForCell(int row, int column) {
+    int numberOfLiveNeighbors = 0;
+
+    for (int neighborRow = row - 1; neighborRow <= row + 1; neighborRow++) {
+      for (int neighborColumn = column - 1; neighborColumn <= column + 1; neighborColumn++) {
+        if (neighborRow == row && neighborColumn == column) {
+          // Don't count yourself as a neighbors
+
+        } else if (neighborRow >= 0 && neighborColumn >= 0 &&
+                   neighborRow <= this.rows - 1 && neighborColumn <= this.columns - 1) {
+
+          CellState neighborState = this.cellStates[neighborRow][neighborColumn];
+          if (neighborState == CellState.ALIVE) {
+            numberOfLiveNeighbors++;
+          }
+        }
+      }
+    }
+
+    return numberOfLiveNeighbors;
+  }
 }
