@@ -79,6 +79,6 @@ public class Generation {
       }
     }
 
-    throw new UnsupportedOperationException();
+    return DEAD;
   }
 }

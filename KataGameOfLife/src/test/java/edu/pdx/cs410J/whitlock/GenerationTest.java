@@ -13,8 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit test for simple App.
  */
-public class GenerationTest
-{
+public class GenerationTest {
 
   @Test
   public void cellWithNoLiveNeighbors() throws IOException {
@@ -125,5 +124,20 @@ public class GenerationTest
     assertThat(generation.getCellStateForNextGeneration(1, 2), equalTo(ALIVE));
     assertThat(generation.getCellStateForNextGeneration(2, 1), equalTo(ALIVE));
   }
+
+  @Test
+  public void allDeadStaysDead() throws IOException {
+    Generation generation = parseGenerationText(
+      "...",
+      "...",
+      "...");
+
+    for (int row = 0; row < generation.getNumberOfRows(); row++) {
+      for (int column = 0; column < generation.getNumberOfColumns(); column++) {
+        assertThat(generation.getCellStateForNextGeneration(row, column), equalTo(DEAD));
+      }
+    }
+  }
+
 
 }
