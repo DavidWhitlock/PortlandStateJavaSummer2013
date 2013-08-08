@@ -1,7 +1,10 @@
 package edu.pdx.cs410J.whitlock.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 
 public class GameOfLifeUI extends Composite {
@@ -60,10 +63,28 @@ public class GameOfLifeUI extends Composite {
     int rows = Integer.parseInt(this.rows.getText());
     int columns = Integer.parseInt(this.columns.getText());
 
+    GameOfLifeServiceAsync service = GWT.create(GameOfLifeService.class);
+    service.createGeneration(rows, columns, new AsyncCallback<Generation>() {
+      @Override
+      public void onFailure(Throwable caught) {
+        Window.alert(caught.getMessage());
+      }
 
-    this.grid.resizeRows(rows);
-    this.grid.resizeColumns(columns);
+      @Override
+      public void onSuccess(Generation generation) {
+        drawGeneration(generation);
+      }
+    });
 
-    redrawGrid();
+
+//    this.grid.resizeRows(rows);
+//    this.grid.resizeColumns(columns);
+//
+//    redrawGrid();
+  }
+
+  private void drawGeneration(Generation generation) {
+    Window.alert("Got a " + generation.getNumberOfRows() + " x " + generation.getNumberOfColumns() +
+      " Generation");
   }
 }

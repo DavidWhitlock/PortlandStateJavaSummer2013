@@ -1,12 +1,18 @@
 package edu.pdx.cs410J.whitlock.client;
 
+import java.io.Serializable;
+
 import static edu.pdx.cs410J.whitlock.client.CellState.ALIVE;
 import static edu.pdx.cs410J.whitlock.client.CellState.DEAD;
 
-public class Generation {
-  private final int rows;
-  private final int columns;
+public class Generation implements Serializable {
+  private int rows;
+  private int columns;
   private CellState[][] cellStates;
+
+  public Generation() {
+
+  }
 
   public Generation(int rows, int columns) {
     this.rows = rows;

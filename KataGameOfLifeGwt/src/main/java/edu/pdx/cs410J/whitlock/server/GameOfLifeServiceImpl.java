@@ -1,20 +1,17 @@
 package edu.pdx.cs410J.whitlock.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import edu.pdx.cs410J.AbstractAppointmentBook;
-import edu.pdx.cs410J.whitlock.client.AppointmentBook;
-import edu.pdx.cs410J.whitlock.client.Appointment;
-import edu.pdx.cs410J.whitlock.client.GameOfLifeServer;
+import edu.pdx.cs410J.whitlock.client.GameOfLifeService;
+import edu.pdx.cs410J.whitlock.client.Generation;
 
 /**
  * The server-side implementation of the division service
  */
-public class GameOfLifeServiceImpl extends RemoteServiceServlet implements GameOfLifeServer
+public class GameOfLifeServiceImpl extends RemoteServiceServlet implements GameOfLifeService
 {
-    public AbstractAppointmentBook ping()
-    {
-        AppointmentBook book = new AppointmentBook();
-        book.addAppointment( new Appointment() );
-        return book;
-    }
+
+  @Override
+  public Generation createGeneration(int rows, int columns) {
+    return new Generation(rows, columns);
+  }
 }
