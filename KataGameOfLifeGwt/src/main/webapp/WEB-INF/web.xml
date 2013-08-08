@@ -6,13 +6,13 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>pingServlet</servlet-name>
-    <servlet-class>edu.pdx.cs410J.whitlock.server.PingServiceImpl</servlet-class>
+    <servlet-name>GameOfLifeServlet</servlet-name>
+    <servlet-class>edu.pdx.cs410J.whitlock.server.GameOfLifeServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>pingServlet</servlet-name>
-    <url-pattern>/apptbook/ping</url-pattern>
+    <servlet-name>GameOfLifeServlet</servlet-name>
+    <url-pattern>/GameOfLife/GameOfLife</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->

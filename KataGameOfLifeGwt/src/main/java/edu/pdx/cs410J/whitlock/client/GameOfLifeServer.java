@@ -7,8 +7,8 @@ import edu.pdx.cs410J.AbstractAppointmentBook;
 /**
  * A GWT remote service that returns a dummy appointment book
  */
-@RemoteServiceRelativePath("ping")
-public interface PingService extends RemoteService {
+@RemoteServiceRelativePath("GameOfLife")
+public interface GameOfLifeServer extends RemoteService {
 
   /**
    * Returns the current date and time on the server

@@ -6,7 +6,7 @@ import edu.pdx.cs410J.AbstractAppointmentBook;
 /**
  * The client-side interface to the ping service
  */
-public interface PingServiceAsync {
+public interface GameOfLifeServerAsync {
 
   /**
    * Return the current date/time on the server

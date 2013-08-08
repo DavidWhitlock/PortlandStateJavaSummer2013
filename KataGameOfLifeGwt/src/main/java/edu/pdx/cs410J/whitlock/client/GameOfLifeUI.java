@@ -34,7 +34,7 @@ public class GameOfLifeUI extends Composite {
     start.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
-        updateSizeOfGrid();
+        startGameOfLife();
       }
     });
     buttons.add(start);
@@ -50,19 +50,16 @@ public class GameOfLifeUI extends Composite {
         Panel cell = new SimplePanel();
         cell.setHeight("10px");
         cell.setWidth("10px");
-        if (row * column % 2 == 0) {
-          cell.setStyleName("cell-alive");
-        } else {
-          cell.setStyleName("cell-dead");
-        }
+        cell.setStyleName("cell-dead");
         grid.setWidget(row, column, cell);
       }
     }
   }
 
-  private void updateSizeOfGrid() {
+  private void startGameOfLife() {
     int rows = Integer.parseInt(this.rows.getText());
     int columns = Integer.parseInt(this.columns.getText());
+
 
     this.grid.resizeRows(rows);
     this.grid.resizeColumns(columns);
