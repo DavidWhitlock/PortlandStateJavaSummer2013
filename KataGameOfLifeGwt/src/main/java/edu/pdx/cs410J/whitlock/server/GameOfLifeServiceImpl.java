@@ -23,4 +23,9 @@ public class GameOfLifeServiceImpl extends RemoteServiceServlet implements GameO
     }
     return generation;
   }
+
+  @Override
+  public Generation getNextGeneration(Generation generation) {
+    return generation.getNextGeneration();
+  }
 }

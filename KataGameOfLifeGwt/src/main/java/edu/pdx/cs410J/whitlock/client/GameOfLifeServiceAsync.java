@@ -11,4 +11,6 @@ public interface GameOfLifeServiceAsync {
    * Return the current date/time on the server
    */
   void createGeneration(int rows, int columns, AsyncCallback<Generation> async);
+
+  void getNextGeneration(Generation generation, AsyncCallback<Generation> asyncCallback);
 }

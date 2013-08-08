@@ -3,6 +3,7 @@ package edu.pdx.cs410J.whitlock.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -12,6 +13,9 @@ public class GameOfLifeUI extends Composite {
   private final TextBox rows;
   private final TextBox columns;
   private final Grid grid;
+  private final GameOfLifeServiceAsync service;
+
+  public Generation generation;
 
   public GameOfLifeUI() {
     grid = new Grid();
@@ -46,6 +50,8 @@ public class GameOfLifeUI extends Composite {
 
     initWidget(dock);
 
+    service = GWT.create(GameOfLifeService.class);
+
     startGameOfLife();
   }
 
@@ -53,23 +59,50 @@ public class GameOfLifeUI extends Composite {
     int rows = Integer.parseInt(this.rows.getText());
     int columns = Integer.parseInt(this.columns.getText());
 
-    GameOfLifeServiceAsync service = GWT.create(GameOfLifeService.class);
     service.createGeneration(rows, columns, new AsyncCallback<Generation>() {
       @Override
       public void onFailure(Throwable caught) {
-        Window.alert(caught.getMessage());
+        reportFailure(caught);
       }
 
       @Override
       public void onSuccess(Generation generation) {
-        drawGeneration(generation);
+        GameOfLifeUI.this.generation = generation;
+        drawGeneration();
       }
     });
 
+    Timer timer = new Timer() {
+      @Override
+      public void run() {
+        drawNextGeneration();
+      }
+    };
+    timer.scheduleRepeating(1000);
 
   }
 
-  private void drawGeneration(Generation generation) {
+  private void reportFailure(Throwable caught) {
+    Window.alert(caught.getMessage());
+  }
+
+  private void drawNextGeneration() {
+    service.getNextGeneration(this.generation, new AsyncCallback<Generation>() {
+      @Override
+      public void onFailure(Throwable caught) {
+        reportFailure(caught);
+      }
+
+      @Override
+      public void onSuccess(Generation result) {
+        GameOfLifeUI.this.generation = result;
+        drawGeneration();
+      }
+    });
+
+  }
+
+  private void drawGeneration() {
     int rows = generation.getNumberOfRows();
     int columns = generation.getNumberOfColumns();
 

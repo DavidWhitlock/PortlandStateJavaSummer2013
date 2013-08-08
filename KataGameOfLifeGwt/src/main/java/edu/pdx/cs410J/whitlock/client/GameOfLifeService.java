@@ -13,4 +13,6 @@ public interface GameOfLifeService extends RemoteService {
    * Return the current date/time on the server
    */
   Generation createGeneration(int rows, int columns);
+
+  Generation getNextGeneration(Generation generation);
 }
