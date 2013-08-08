@@ -14,9 +14,7 @@ public class GameOfLifeUI extends Composite {
   private final Grid grid;
 
   public GameOfLifeUI() {
-    grid = new Grid(5, 5);
-
-    redrawGrid();
+    grid = new Grid();
 
     DockPanel dock = new DockPanel();
     dock.add(grid, DockPanel.CENTER);
@@ -25,11 +23,13 @@ public class GameOfLifeUI extends Composite {
     buttons.add(new Label("Rows:"));
 
     rows = new TextBox();
+    rows.setText("5");
     rows.setVisibleLength(3);
     buttons.add(rows);
     buttons.add(new Label("Columns:"));
 
     columns = new TextBox();
+    columns.setText("5");
     columns.setVisibleLength(3);
     buttons.add(columns);
 
@@ -45,18 +45,8 @@ public class GameOfLifeUI extends Composite {
     dock.add(buttons, DockPanel.NORTH);
 
     initWidget(dock);
-  }
 
-  private void redrawGrid() {
-    for (int row = 0; row < grid.getRowCount(); row++) {
-      for (int column = 0; column < grid.getColumnCount(); column++) {
-        Panel cell = new SimplePanel();
-        cell.setHeight("10px");
-        cell.setWidth("10px");
-        cell.setStyleName("cell-dead");
-        grid.setWidget(row, column, cell);
-      }
-    }
+    startGameOfLife();
   }
 
   private void startGameOfLife() {
@@ -77,14 +67,28 @@ public class GameOfLifeUI extends Composite {
     });
 
 
-//    this.grid.resizeRows(rows);
-//    this.grid.resizeColumns(columns);
-//
-//    redrawGrid();
   }
 
   private void drawGeneration(Generation generation) {
-    Window.alert("Got a " + generation.getNumberOfRows() + " x " + generation.getNumberOfColumns() +
-      " Generation");
+    int rows = generation.getNumberOfRows();
+    int columns = generation.getNumberOfColumns();
+
+    this.grid.resizeRows(rows);
+    this.grid.resizeColumns(columns);
+
+    for (int row = 0; row < grid.getRowCount(); row++) {
+      for (int column = 0; column < grid.getColumnCount(); column++) {
+        Panel cell = new SimplePanel();
+        cell.setHeight("10px");
+        cell.setWidth("10px");
+        if (generation.getCellState(row, column) == CellState.ALIVE) {
+          cell.setStyleName("cell-alive");
+        } else {
+          cell.setStyleName("cell-dead");
+        }
+        grid.setWidget(row, column, cell);
+      }
+    }
+
   }
 }
