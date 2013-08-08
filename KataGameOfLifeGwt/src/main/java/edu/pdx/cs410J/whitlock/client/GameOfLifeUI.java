@@ -1,12 +1,50 @@
 package edu.pdx.cs410J.whitlock.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 
 public class GameOfLifeUI extends Composite {
 
-  public GameOfLifeUI() {
-    Grid grid = new Grid(5, 5);
+  private final TextBox rows;
+  private final TextBox columns;
+  private final Grid grid;
 
+  public GameOfLifeUI() {
+    grid = new Grid(5, 5);
+
+    redrawGrid();
+
+    DockPanel dock = new DockPanel();
+    dock.add(grid, DockPanel.CENTER);
+
+    HorizontalPanel buttons = new HorizontalPanel();
+    buttons.add(new Label("Rows:"));
+
+    rows = new TextBox();
+    rows.setVisibleLength(3);
+    buttons.add(rows);
+    buttons.add(new Label("Columns:"));
+
+    columns = new TextBox();
+    columns.setVisibleLength(3);
+    buttons.add(columns);
+
+    Button start = new Button("Start");
+    start.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        updateSizeOfGrid();
+      }
+    });
+    buttons.add(start);
+
+    dock.add(buttons, DockPanel.NORTH);
+
+    initWidget(dock);
+  }
+
+  private void redrawGrid() {
     for (int row = 0; row < grid.getRowCount(); row++) {
       for (int column = 0; column < grid.getColumnCount(); column++) {
         Panel cell = new SimplePanel();
@@ -20,25 +58,15 @@ public class GameOfLifeUI extends Composite {
         grid.setWidget(row, column, cell);
       }
     }
+  }
 
-    DockPanel dock = new DockPanel();
-    dock.add(grid, DockPanel.CENTER);
+  private void updateSizeOfGrid() {
+    int rows = Integer.parseInt(this.rows.getText());
+    int columns = Integer.parseInt(this.columns.getText());
 
-    HorizontalPanel buttons = new HorizontalPanel();
-    buttons.add(new Label("Rows:"));
+    this.grid.resizeRows(rows);
+    this.grid.resizeColumns(columns);
 
-    TextBox rows = new TextBox();
-    rows.setVisibleLength(3);
-    buttons.add(rows);
-    buttons.add(new Label("Columns:"));
-
-    TextBox columns = new TextBox();
-    columns.setVisibleLength(3);
-    buttons.add(columns);
-    buttons.add(new Button("Start"));
-
-    dock.add(buttons, DockPanel.NORTH);
-
-    initWidget(dock);
+    redrawGrid();
   }
 }
