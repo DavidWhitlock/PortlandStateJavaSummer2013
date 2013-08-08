@@ -17,6 +17,6 @@
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>AppointmentBookGwt.html</welcome-file>
+    <welcome-file>GameOfLifeGwt.html</welcome-file>
   </welcome-file-list>
 </web-app>
